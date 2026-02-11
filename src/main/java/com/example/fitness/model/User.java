@@ -1,7 +1,6 @@
 package com.example.fitness.model;
 
 public class User {
-
     private int id;
     private String name;
     private int age;
@@ -28,5 +27,3 @@ public class User {
     public double getWeight() { return weight; }
     public void setWeight(double weight) { this.weight = weight; }
 }
-
-

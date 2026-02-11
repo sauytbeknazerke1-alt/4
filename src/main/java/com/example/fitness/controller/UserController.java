@@ -1,27 +1,42 @@
 package com.example.fitness.controller;
 
 import com.example.fitness.model.User;
-import com.example.fitness.service.FitnessApp;
+import com.example.fitness.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
-    private final FitnessApp fitnessApp;
+    private final UserService service;
 
-    public UserController(FitnessApp fitnessApp) {
-        this.fitnessApp = fitnessApp;
-    }
-
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable int id) {
-        return fitnessApp.getUserById(id);
+    public UserController(UserService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return fitnessApp.addUser(user);
+    public String create(@RequestBody User user) {
+        service.createUser(user);
+        return "User created";
+    }
+
+    @GetMapping("/{id}")
+    public User get(@PathVariable int id) {
+        return service.getUser(id);
+    }
+
+    @PutMapping
+    public String update(@RequestBody User user) {
+        service.updateUser(user);
+        return "User updated";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id) {
+        service.deleteUser(id);
+        return "User deleted";
     }
 }
+
+
 
